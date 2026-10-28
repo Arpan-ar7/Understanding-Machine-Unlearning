@@ -8,12 +8,15 @@ authors = [
 ]
 requires-python = ">=3.14"
 dependencies = [
+    "datasets>=5.1.0",
     "matplotlib>=3.11.2",
     "numpy>=2.5.4",
     "pandas>=3.1.0",
     "scikit-learn>=1.9.1",
     "seaborn>=0.13.2",
     "torch>=2.14.1",
+    "torchvision>=0.29.1",
+    "transformers>=5.21.0",
 ]
 
 [project.scripts]
@@ -28,3 +31,14 @@ dev = [
     "ipykernel>=7.4.0",
     "jupyter>=1.1.1",
 ]
+
+# Get torch + torchvision from PyTorch's CUDA 13.2 index (GPU build)
+# instead of PyPI (CPU-only build on Windows).
+[[tool.uv.index]]
+name = "pytorch-cu132"
+url = "https://download.pytorch.org/whl/cu132"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu132" }
+torchvision = { index = "pytorch-cu132" }
